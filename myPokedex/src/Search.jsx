@@ -16,6 +16,14 @@ const Search = () => {
   return (
     <div className="search">
       <h2>Search for a Pokemon</h2>
+      <div className="search-box">
+        <input
+          type="text"
+          value={input}
+          placeholder="Enter Pokemon name..."
+          onChange={(e) => setInput(e.target.value)}
+        />
+      </div>
       {pokemon && (
         <div id="pokemon-card">
           <h2>{pokemon.name}</h2>
