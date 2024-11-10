@@ -3,15 +3,15 @@ import { useState, useEffect } from 'react'
 
 const Search = () => {
     const [input, setInput] = useState("");
-    const [pokemon, setPokemon] = useState({
-        name: "pikachu",
-        height: 4,
-        weight: 60,
-        sprites: {
-        front_default:
-            "https://raw.githubusercontent.com/getmimo/things-api/main/files/pokedex/sprites/master/sprites/pokemon/25.png",
-        },
-    });
+    const [pokemon, setPokemon] = useState(null);
+
+    const fetchPokemon = async () => {
+        const response = await fetch(
+          `https://pokedex.mimo.dev/api/pokemon/${input.toLowerCase()}`
+        );
+        const data = await response.json();
+        setPokemon(data);
+      };
 
   return (
     <div className="search">
@@ -23,6 +23,7 @@ const Search = () => {
           placeholder="Enter Pokemon name..."
           onChange={(e) => setInput(e.target.value)}
         />
+        <button onClick={fetchPokemon}>Search</button>
       </div>
       {pokemon && (
         <div id="pokemon-card">
